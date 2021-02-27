@@ -31,7 +31,6 @@ int main()
         
         bottom = 0;
         top = N - 1;
-
         find = false;
 
         while (bottom <= top)
