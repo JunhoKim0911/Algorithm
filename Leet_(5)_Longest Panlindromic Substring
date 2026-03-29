@@ -1,0 +1,40 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int len = s.length();
+        if (len == 1)
+        {
+            return s;
+        }
+
+        int start = 0;
+        int max_len = 1;
+
+        auto expand_from_center = [&](int left, int right)
+        {
+            while((left >= 0) && (right < len) && (s[left] == s[right]))
+            {
+                left--;
+                right++;
+            }
+
+            return right - left - 1;
+        };
+
+        for(int i = 0; i < len - 1; i++)
+        {
+            int lenOdd = expand_from_center(i, i);      // 홀수
+            int lenEven = expand_from_center(i, i + 1); // 짝수
+
+            int current_max = max(lenOdd, lenEven);
+
+            if(current_max > max_len)
+            {
+                max_len = current_max;
+                start = i - (current_max - 1) / 2;
+            }
+        }
+
+        return s.substr(start, max_len);
+    }
+};
