@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        std::vector<int> row(rowIndex + 1, 1);
+        
+        // i = 현재 계산 중인 row
+        for (int i = 1; i < rowIndex; ++i)
+        {
+            // 뒤에서부터 앞으로 계산
+            // 이전 상태의 값을 덮어쓰지 않도록(앞에서부터 하면 error)
+            for (int j = i; j > 0; --j)
+            {
+                row[j] = row[j] + row[j - 1];
+            }
+        }
+        
+        return row;
+    }
+};
